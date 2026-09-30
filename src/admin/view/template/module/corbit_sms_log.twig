@@ -1,0 +1,36 @@
+<div class="table-responsive">
+  <table class="table table-bordered table-hover">
+    <thead>
+      <tr>
+        <td class="text-start">{{ column_date }}</td>
+        <td class="text-start">{{ column_source }}</td>
+        <td class="text-start">{{ column_numbers }}</td>
+        <td class="text-start">{{ column_message }}</td>
+        <td class="text-center">{{ column_status }}</td>
+        <td class="text-start">{{ column_response }}</td>
+      </tr>
+    </thead>
+    <tbody>
+      {% if logs %}
+        {% for log in logs %}
+          <tr>
+            <td class="text-start text-nowrap">{{ log.date_added }}</td>
+            <td class="text-start">{{ log.source|e }}</td>
+            <td class="text-start" dir="ltr" style="max-width: 200px; word-break: break-all;">{{ log.numbers|e }}</td>
+            <td class="text-start">{{ log.message|e }}</td>
+            <td class="text-center">{% if log.status %}<span class="badge bg-success"><i class="fa-solid fa-check"></i></span>{% else %}<span class="badge bg-danger"><i class="fa-solid fa-xmark"></i></span>{% endif %}</td>
+            <td class="text-start small">{{ log.response|e }}</td>
+          </tr>
+        {% endfor %}
+      {% else %}
+        <tr>
+          <td class="text-center" colspan="6">{{ text_no_results }}</td>
+        </tr>
+      {% endif %}
+    </tbody>
+  </table>
+</div>
+<div class="row">
+  <div class="col-sm-6 text-start">{{ pagination }}</div>
+  <div class="col-sm-6 text-end">{{ results }}</div>
+</div>
