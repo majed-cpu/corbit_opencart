@@ -1,2 +1,4 @@
 dist/
+build/
 vendor/
+tests/mock-gateway/requests.jsonl

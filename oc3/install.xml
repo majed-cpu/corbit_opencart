@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<modification>
+    <name>Corbit SMS</name>
+    <code>corbit_sms</code>
+    <version>1.1.0</version>
+    <author>Corbit</author>
+    <link>https://corbit.sa</link>
+    <!-- Require OTP verification of the mobile number before an account is created. -->
+    <file path="catalog/controller/account/register.php">
+        <operation>
+            <search><![CDATA[function validate() {]]></search>
+            <add position="after"><![CDATA[
+		$corbit_sms_otp_error = $this->load->controller('extension/module/corbit_sms/registerValidate');
+
+		if ($corbit_sms_otp_error) {
+			$this->error['warning'] = $corbit_sms_otp_error;
+		}
+]]></add>
+        </operation>
+    </file>
+</modification>

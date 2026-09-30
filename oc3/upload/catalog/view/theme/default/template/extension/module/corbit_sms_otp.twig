@@ -1,0 +1,75 @@
+<div id="corbit-otp" style="margin-top: 10px;">
+  <label for="input-corbit-otp" class="text-muted small">{{ text_otp_title }}</label>
+  <div class="input-group">
+    <input type="text" name="corbit_otp_code" value="" placeholder="{{ entry_otp_code }}" id="input-corbit-otp" class="form-control" inputmode="numeric" autocomplete="one-time-code" maxlength="8" dir="ltr"/>
+    <span class="input-group-btn">
+      <button type="button" id="button-corbit-otp" class="btn btn-default">{{ button_otp_send }}</button>
+    </span>
+  </div>
+  <div id="corbit-otp-message" class="text-success"></div>
+  <div id="error-corbit-otp" class="text-danger"></div>
+</div>
+<script type="text/javascript"><!--
+(function ($) {
+    var button = $('#button-corbit-otp');
+    var timer = null;
+
+    var countdown = function (seconds) {
+        clearInterval(timer);
+
+        var tick = function () {
+            if (seconds <= 0) {
+                clearInterval(timer);
+
+                button.prop('disabled', false).text({{ button_otp_resend|json_encode }});
+
+                return;
+            }
+
+            button.prop('disabled', true).text({{ text_otp_resend|json_encode }}.replace('%s', seconds));
+
+            seconds--;
+        };
+
+        tick();
+
+        timer = setInterval(tick, 1000);
+    };
+
+    button.on('click', function () {
+        var form = button.closest('form');
+        var telephone = (form.length ? form : $(document)).find('input[name="telephone"]').first().val();
+
+        $.ajax({
+            url: {{ send_url|json_encode }},
+            type: 'post',
+            data: {telephone: telephone},
+            dataType: 'json',
+            beforeSend: function () {
+                button.prop('disabled', true);
+                $('#error-corbit-otp').text('');
+                $('#corbit-otp-message').text('');
+            },
+            success: function (json) {
+                if (json['error']) {
+                    $('#error-corbit-otp').text(json['error']);
+                }
+
+                if (json['success']) {
+                    $('#corbit-otp-message').text(json['success']);
+                    $('#input-corbit-otp').val('').focus();
+                }
+
+                if (json['wait']) {
+                    countdown(json['wait']);
+                } else {
+                    button.prop('disabled', false);
+                }
+            },
+            error: function () {
+                button.prop('disabled', false);
+            }
+        });
+    });
+})(jQuery);
+//--></script>
