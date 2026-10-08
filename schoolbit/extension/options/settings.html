@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>إعدادات سكول بت</title>
+    <link rel="icon" href="../assets/img/icon128.png">
+    <style>
+        :root {
+            --grad-start: #FF6B35;
+            --grad-mid:   #FF1B6B;
+            --grad-end:   #E91E63;
+            --primary:    #E91E63;
+            --primary-dk: #C2185B;
+            --accent:     #FF6B35;
+            --bg:         #FAFAFB;
+            --card:       #ffffff;
+            --text:       #2C2C2C;
+            --muted:      #8E8E93;
+            --border:     #EEEFF1;
+            --success:    #34C759;
+            --danger:     #FF3B30;
+            --info:       #5AC8FA;
+            --shadow:     0 1px 3px rgba(233,30,99,0.06), 0 4px 12px rgba(0,0,0,0.04);
+        }
+        * { box-sizing: border-box; }
+        body {
+            margin: 0;
+            font-family: 'SF Arabic', 'Tahoma', 'Segoe UI', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            font-size: 14px;
+            min-height: 100vh;
+            -webkit-font-smoothing: antialiased;
+        }
+        .header {
+            background: linear-gradient(135deg, var(--grad-start) 0%, var(--grad-mid) 50%, var(--grad-end) 100%);
+            color: white;
+            padding: 32px 24px;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(233,30,99,0.15);
+            position: relative;
+            overflow: hidden;
+        }
+        .header::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 30% 0%, rgba(255,255,255,0.18), transparent 60%);
+            pointer-events: none;
+        }
+        .header img {
+            width: 56px;
+            height: 56px;
+            border-radius: 14px;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.18);
+            margin-bottom: 12px;
+            position: relative;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 24px;
+            font-weight: 800;
+            position: relative;
+            letter-spacing: 0.3px;
+        }
+        .header .sub {
+            margin-top: 6px;
+            font-size: 13px;
+            opacity: 0.95;
+            position: relative;
+        }
+        .container {
+            max-width: 760px;
+            margin: 28px auto;
+            padding: 0 16px;
+        }
+        .card {
+            background: var(--card);
+            border-radius: 16px;
+            padding: 22px;
+            margin-bottom: 16px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
+        }
+        .card h2 {
+            margin: 0 0 4px;
+            font-size: 16px;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 800;
+        }
+        .card .desc {
+            color: var(--muted);
+            font-size: 12.5px;
+            margin-bottom: 16px;
+            line-height: 1.6;
+        }
+        .row {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 12px;
+            align-items: flex-end;
+            flex-wrap: wrap;
+        }
+        .field { flex: 1 1 220px; }
+        .field label {
+            display: block;
+            font-size: 11.5px;
+            color: var(--muted);
+            margin-bottom: 5px;
+            font-weight: 700;
+            letter-spacing: 0.2px;
+        }
+        .field input, .field select, .field textarea {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1.5px solid var(--border);
+            border-radius: 8px;
+            font-size: 13px;
+            font-family: inherit;
+            direction: ltr;
+            text-align: left;
+            background: white;
+            transition: border-color .15s, box-shadow .15s;
+        }
+        .field input:focus, .field select:focus, .field textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(233,30,99,0.12);
+        }
+        .field-rtl input, .field-rtl select, .field-rtl textarea {
+            direction: rtl;
+            text-align: right;
+        }
+        .btn {
+            padding: 10px 18px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 700;
+            font-family: inherit;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: transform .12s, box-shadow .12s;
+            text-decoration: none;
+        }
+        .btn:hover { transform: translateY(-1px); }
+        .desc a { color: #E91E63; }
+        .btn-primary {
+            background: linear-gradient(135deg, var(--grad-start), var(--grad-end));
+            color: white;
+            box-shadow: 0 4px 12px rgba(233,30,99,0.25);
+        }
+        .btn-primary:hover { box-shadow: 0 6px 16px rgba(233,30,99,0.35); }
+        .btn-success {
+            background: var(--success);
+            color: white;
+            box-shadow: 0 4px 12px rgba(52,199,89,0.25);
+        }
+        .btn-success:hover { box-shadow: 0 6px 16px rgba(52,199,89,0.35); }
+        .btn-outline {
+            background: transparent;
+            color: var(--primary);
+            border: 1.5px solid var(--primary);
+        }
+        .btn-outline:hover { background: rgba(233,30,99,0.05); }
+        .btn[disabled] { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+        .balance-display {
+            background: linear-gradient(135deg, rgba(52,199,89,0.08), rgba(52,199,89,0.16));
+            border: 1.5px solid rgba(52,199,89,0.35);
+            border-radius: 12px;
+            padding: 18px 22px;
+            margin-top: 14px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .balance-display .num {
+            font-size: 32px;
+            font-weight: 800;
+            color: #1B7E3A;
+            font-family: 'SF Mono', 'Consolas', monospace;
+            letter-spacing: -0.5px;
+        }
+        .balance-display .label {
+            font-size: 12px;
+            color: var(--muted);
+            font-weight: 600;
+        }
+        .status {
+            padding: 12px 16px;
+            border-radius: 8px;
+            margin-top: 14px;
+            font-size: 13px;
+            font-weight: 600;
+            display: none;
+            border: 1.5px solid transparent;
+        }
+        .status.show { display: block; }
+        .status.ok    { background: rgba(52,199,89,0.10); color: #1B7E3A; border-color: rgba(52,199,89,0.30); }
+        .status.err   { background: rgba(255,59,48,0.10); color: #C0392B; border-color: rgba(255,59,48,0.30); }
+        .status.info  { background: rgba(90,200,250,0.10); color: #006B9F; border-color: rgba(90,200,250,0.30); }
+
+        .footer {
+            text-align: center;
+            color: var(--muted);
+            font-size: 12px;
+            padding: 20px;
+        }
+        .footer strong {
+            background: linear-gradient(135deg, var(--grad-start), var(--grad-end));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 800;
+        }
+        details {
+            background: var(--bg);
+            border: 1.5px dashed var(--border);
+            border-radius: 8px;
+            padding: 10px 14px;
+            margin-top: 14px;
+            font-size: 12px;
+        }
+        details summary {
+            cursor: pointer;
+            color: var(--muted);
+            font-weight: 700;
+            padding: 4px 0;
+        }
+        details[open] summary { color: var(--primary); }
+        code {
+            background: rgba(233,30,99,0.06);
+            color: var(--primary-dk);
+            padding: 2px 7px;
+            border-radius: 5px;
+            font-size: 11px;
+            direction: ltr;
+            display: inline-block;
+            font-family: 'SF Mono', 'Consolas', monospace;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <img src="../assets/img/icon128.png" alt="سكول بت">
+        <h1>إعدادات سكول بت</h1>
+        <div class="sub">إعدادات بوابة الرسائل النصية SMS — sms.corbit.sa</div>
+    </div>
+    <div class="container">
+
+        <div class="card">
+            <h2>🔑 مفتاح بوابة الرسائل</h2>
+            <div class="desc">أدخل الـ API Key (Bearer token) فقط — لا حاجة لاسم مستخدم أو كلمة مرور.
+                ليس لديك مفتاح؟ احصل عليه من <a href="https://sms.corbit.sa" target="_blank" rel="noopener"><b>sms.corbit.sa</b></a>.</div>
+
+            <div class="row">
+                <div class="field">
+                    <label for="apiKey">API Key</label>
+                    <input id="apiKey" type="password" placeholder="ضع الـ Bearer token هنا" autocomplete="off">
+                </div>
+                <button id="toggleKey" class="btn btn-outline" type="button">إظهار</button>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>📛 اسم المرسل الافتراضي</h2>
+            <div class="desc">يتم جلب أسماء المرسلين المعتمدة من بوابتك تلقائياً. اضغط "تحديث" للحصول على أحدث قائمة.</div>
+
+            <div class="row">
+                <div class="field">
+                    <label for="senderSelect">اختر اسم المرسل</label>
+                    <select id="senderSelect">
+                        <option value="">— اضغط تحديث القائمة —</option>
+                    </select>
+                </div>
+                <button id="refreshSenders" class="btn btn-primary" type="button">🔄 تحديث القائمة</button>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>💰 رصيد الرسائل</h2>
+            <div class="desc">يعرض رصيد الرسائل المتبقي في حسابك على البوابة (للاطلاع فقط).</div>
+
+            <div class="row">
+                <button id="refreshBalance" class="btn btn-primary" type="button">🔄 جلب الرصيد</button>
+                <button id="testConnection" class="btn btn-outline" type="button">📡 اختبار الاتصال</button>
+            </div>
+
+            <div class="balance-display" id="balanceDisplay" style="display:none">
+                <div>
+                    <div class="label">الرصيد الحالي</div>
+                    <div class="num" id="balanceNum">—</div>
+                </div>
+                <div style="text-align:left">
+                    <div class="label">آخر تحديث</div>
+                    <div id="balanceTime" style="font-size:13px;color:var(--text)">—</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="row" style="justify-content:flex-end;margin-bottom:0">
+                <button id="reset" class="btn btn-outline" type="button">↩ استعادة الافتراضي</button>
+                <button id="save" class="btn btn-success" type="button">💾 حفظ الإعدادات</button>
+            </div>
+            <div id="status" class="status"></div>
+        </div>
+
+        <div class="card">
+            <h2>🎧 الدعم الفني — 24/7</h2>
+            <div class="desc">فريق الدعم متاح على مدار الساعة، اتصالاً وواتساب، على الرقم الموحّد <b dir="ltr">920006900</b>.</div>
+            <div class="row" style="margin-bottom:0">
+                <a class="btn btn-primary" href="tel:920006900">📞 اتصال 920006900</a>
+                <a class="btn btn-outline" href="https://wa.me/966920006900" target="_blank" rel="noopener">💬 واتساب 920006900</a>
+                <a class="btn btn-outline" href="https://sms.corbit.sa" target="_blank" rel="noopener">🌐 sms.corbit.sa</a>
+            </div>
+        </div>
+
+    </div>
+    <div class="footer">
+        سكول بت · جميع الحقوق محفوظة لـ <strong>كوربت - المدار</strong> · الدعم الفني 920006900 (اتصال وواتساب 24/7)
+    </div>
+    <script src="settings.js"></script>
+</body>
+</html>

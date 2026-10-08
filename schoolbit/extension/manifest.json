@@ -1,0 +1,110 @@
+{
+  "manifest_version": 3,
+  "name": "سكول بت",
+  "short_name": "سكول بت",
+  "description": "سكول بت: مساعد إداريي المدارس في نور ومدرستي، مع ربط نظام سكول بت ورسائل sms.corbit.sa. الدعم الفني 24/7: 920006900",
+  "version": "1.4",
+  "homepage_url": "https://corbit.sa",
+  "icons": {
+    "16": "assets/img/icon16.png",
+    "32": "assets/img/icon32.png",
+    "48": "assets/img/icon48.png",
+    "128": "assets/img/icon128.png"
+  },
+  "action": {
+    "default_icon": {
+      "16": "assets/img/icon16.png",
+      "32": "assets/img/icon32.png",
+      "48": "assets/img/icon48.png",
+      "128": "assets/img/icon128.png"
+    },
+    "default_title": "سكول بت",
+    "default_popup": "layouts/popup.html"
+  },
+  "background": {
+    "service_worker": "assets/js/service-worker.js"
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "assets/js/jquery.min.js",
+        "assets/js/content-script.js"
+      ],
+      "matches": [
+        "https://noor.moe.gov.sa/*",
+        "https://schools.madrasati.sa/*"
+      ]
+    }
+  ],
+  "permissions": [
+    "storage"
+  ],
+  "host_permissions": [
+    "https://api.corbit.sa/*",
+    "https://sms.corbit.sa/*",
+    "https://app.mobile.net.sa/*",
+    "https://fingerprint-cp.mobile.net.sa/*"
+  ],
+  "options_page": "options/settings.html",
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'none'; base-uri 'self'; frame-ancestors 'none';"
+  },
+  "web_accessible_resources": [
+    {
+      "matches": [
+        "https://noor.moe.gov.sa/*",
+        "https://schools.madrasati.sa/*"
+      ],
+      "resources": [
+        "assets/js/b.js",
+        "assets/js/features/excel/local-parser.js",
+        "assets/js/features/lib/xlsx.full.min.js",
+        "assets/js/features/madrasati/add-students-and-password.js",
+        "assets/js/features/madrasati/add-students-move.js",
+        "assets/js/features/madrasati/add-table.js",
+        "assets/js/features/madrasati/al3orf.js",
+        "assets/js/features/madrasati/asc.js",
+        "assets/js/features/madrasati/designer.js",
+        "assets/js/features/madrasati/full-lessons.js",
+        "assets/js/features/madrasati/homeworks.js",
+        "assets/js/features/madrasati/import-students-from-madrasati.js",
+        "assets/js/features/madrasati/import-students-from-noor.js",
+        "assets/js/features/madrasati/move-add.js",
+        "assets/js/features/madrasati/move.js",
+        "assets/js/features/madrasati/not-active.js",
+        "assets/js/features/madrasati/reports-attends-print.js",
+        "assets/js/features/madrasati/reports.js",
+        "assets/js/features/madrasati/students-ghiab-manual.js",
+        "assets/js/features/madrasati/students-lessons.js",
+        "assets/js/features/madrasati/students_access.js",
+        "assets/js/features/madrasati/table_from_noor.js",
+        "assets/js/features/madrasati/teachers-full.js",
+        "assets/js/features/madrasati/teachers-lessons.js",
+        "assets/js/features/madrasati/teachers-stats.js",
+        "assets/js/features/madrasati/teachers-week.js",
+        "assets/js/features/madrasati/weeklyplan.js",
+        "assets/js/features/noor/add-ghiab.js",
+        "assets/js/features/noor/add-late.js",
+        "assets/js/features/noor/add_bis.js",
+        "assets/js/features/noor/alerts.js",
+        "assets/js/features/noor/export-parents.js",
+        "assets/js/features/noor/index.js",
+        "assets/js/features/noor/results.js",
+        "assets/js/features/schoolbit/bridge.js",
+        "assets/js/features/schoolbit/panel.js",
+        "assets/js/features/schoolbit/push.js",
+        "assets/js/features/schoolbit/reader.js",
+        "assets/js/features/sms/mobile-net-sa.js",
+        "assets/js/features/website/move.js",
+        "assets/js/main.js",
+        "assets/img/loading.svg",
+        "assets/img/icon48.png",
+        "reports/view.html",
+        "reports/view.js",
+        "reports/reports.css",
+        "reports/templates/*.js",
+        "assets/js/features/noor/corbit-provider.js"
+      ]
+    }
+  ]
+}

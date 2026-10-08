@@ -1,0 +1,80 @@
+/* صفحة التقارير المحلية لإضافة سكول بت — تُطبع على A4 */
+:root {
+    --primary: #E91E63;
+    --primary-2: #FF6B35;
+    --ink: #222;
+    --muted: #666;
+    --line: #cfcfcf;
+    --head: #f3f3f5;
+    --ok: #1B7E3A;
+    --warn: #C2410C;
+    --danger: #B3261E;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; background: #e9e9ec; color: var(--ink); font-family: "Tajawal", "Segoe UI", Tahoma, Arial, sans-serif; font-size: 13px; }
+
+.toolbar {
+    position: sticky; top: 0; z-index: 10;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 10px 18px; background: #fff; border-bottom: 1px solid var(--line);
+}
+.toolbar .brand { display: flex; align-items: center; gap: 8px; font-weight: 800; color: var(--primary); }
+.toolbar .brand img { width: 28px; height: 28px; border-radius: 7px; }
+.toolbar .actions { display: flex; gap: 8px; }
+.btn { border: 1px solid var(--primary); background: #fff; color: var(--primary); padding: 7px 14px; border-radius: 8px; cursor: pointer; font-family: inherit; font-weight: 700; font-size: 13px; }
+.btn-primary { background: linear-gradient(135deg, var(--primary-2), var(--primary)); color: #fff; border: none; }
+.btn:disabled { opacity: .5; cursor: default; }
+
+.page { width: 210mm; min-height: 297mm; margin: 16px auto; background: #fff; padding: 12mm 12mm 14mm; box-shadow: 0 6px 24px rgba(0,0,0,.12); }
+.page.landscape { width: 297mm; min-height: 210mm; }
+
+.report-header { display: grid; grid-template-columns: 1fr 1.4fr 1fr; align-items: start; gap: 8px; border-bottom: 2px solid var(--primary); padding-bottom: 8px; margin-bottom: 12px; }
+.report-header .meta { font-size: 12px; line-height: 1.7; }
+.report-header .meta-left { text-align: left; direction: rtl; }
+.report-header .meta-center { text-align: center; }
+.report-header h1 { font-size: 20px; margin: 0 0 2px; color: var(--primary); }
+.report-header .subtitle { color: var(--muted); font-size: 12px; }
+.report-header .small { color: #999; font-size: 10px; }
+.report-footer { border-top: 1px solid var(--line); margin-top: 14px; padding-top: 6px; color: #999; font-size: 10px; text-align: center; }
+
+#report h2 { font-size: 16px; margin: 14px 0 6px; color: var(--ink); }
+#report h3 { font-size: 14px; margin: 10px 0 4px; }
+#report p { margin: 4px 0; line-height: 1.7; }
+.loading { text-align: center; color: var(--muted); padding: 40px; }
+.notice { background: #FFF5F0; border: 1px solid #ffd3c2; border-radius: 8px; padding: 10px 14px; margin: 8px 0; }
+.notice.error { background: #FEF0F0; border-color: #f5b5b5; color: var(--danger); }
+
+table.rpt { width: 100%; border-collapse: collapse; margin: 6px 0 10px; page-break-inside: auto; }
+table.rpt th, table.rpt td { border: 1px solid var(--line); padding: 5px 6px; text-align: center; vertical-align: middle; }
+table.rpt th { background: var(--head); font-weight: 800; }
+table.rpt tr { page-break-inside: avoid; }
+table.rpt td.text { text-align: right; }
+table.rpt .num { font-family: Tahoma, Arial, sans-serif; direction: ltr; }
+table.rpt tbody tr:nth-child(even) { background: #fafafa; }
+
+.badge { display: inline-block; padding: 1px 8px; border-radius: 999px; font-size: 11px; font-weight: 700; }
+.badge-ok { background: #e6f6ea; color: var(--ok); }
+.badge-warn { background: #fff1e6; color: var(--warn); }
+.badge-danger { background: #fde8e6; color: var(--danger); }
+.badge-muted { background: #eee; color: #555; }
+
+.stats { display: flex; gap: 10px; flex-wrap: wrap; margin: 6px 0 10px; }
+.stat { border: 1px solid var(--line); border-radius: 8px; padding: 6px 12px; min-width: 110px; text-align: center; }
+.stat .v { font-size: 18px; font-weight: 800; color: var(--primary); }
+.stat .l { font-size: 11px; color: var(--muted); }
+
+.sign { display: flex; justify-content: space-between; margin-top: 24px; padding: 0 20px; }
+.sign div { text-align: center; min-width: 150px; }
+.sign .line { border-top: 1px solid var(--ink); margin-top: 28px; padding-top: 4px; }
+
+.page-break { page-break-after: always; break-after: page; }
+.letter { page-break-after: always; break-after: page; padding: 10mm 6mm; line-height: 2; font-size: 14px; }
+.letter:last-child { page-break-after: auto; }
+
+@media print {
+    html, body { background: #fff; }
+    .no-print { display: none !important; }
+    .page { width: auto; min-height: auto; margin: 0; padding: 0; box-shadow: none; }
+    @page { size: A4; margin: 12mm; }
+    .page.landscape ~ * { }
+}

@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>سكول بت</title>
+    <style>
+        :root {
+            --grad-start: #FF6B35;
+            --grad-mid:   #FF1B6B;
+            --grad-end:   #E91E63;
+            --primary:    #E91E63;
+            --primary-dk: #C2185B;
+            --accent:     #FF6B35;
+            --bg:         #FAFAFB;
+            --card:       #ffffff;
+            --text:       #2C2C2C;
+            --muted:      #8E8E93;
+            --border:     #EEEFF1;
+            --success:    #34C759;
+            --warning:    #FF9500;
+            --danger:     #FF3B30;
+            --shadow:     0 2px 8px rgba(233,30,99,0.08), 0 8px 24px rgba(0,0,0,0.06);
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            width: 380px;
+            font-family: 'SF Arabic', 'Tajawal', 'Tahoma', 'Segoe UI', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            font-size: 13px;
+            -webkit-font-smoothing: antialiased;
+        }
+        .header {
+            background: linear-gradient(135deg, var(--grad-start) 0%, var(--grad-mid) 50%, var(--grad-end) 100%);
+            color: white;
+            padding: 24px 18px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .header::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 25% -10%, rgba(255,255,255,0.25), transparent 55%);
+            pointer-events: none;
+        }
+        .header .logo {
+            width: 56px; height: 56px;
+            background: rgba(255,255,255,0.18);
+            border-radius: 16px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 10px;
+            backdrop-filter: blur(6px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.15), inset 0 1px 0 rgba(255,255,255,0.3);
+            position: relative;
+        }
+        .header .logo img {
+            width: 40px; height: 40px;
+            border-radius: 10px;
+        }
+        .header h1 {
+            font-size: 22px;
+            font-weight: 800;
+            letter-spacing: 0.3px;
+            position: relative;
+            line-height: 1.2;
+        }
+        .header .sub {
+            margin-top: 5px;
+            font-size: 12px;
+            opacity: 0.95;
+            position: relative;
+        }
+        .body { padding: 14px; }
+
+        .badge {
+            padding: 3px 11px;
+            border-radius: 999px;
+            font-size: 10.5px;
+            font-weight: 800;
+            letter-spacing: 0.3px;
+        }
+        .badge-on  { background: rgba(52,199,89,0.13); color: #1B7E3A; }
+        .badge-muted { background: rgba(255,107,53,0.13); color: #C2410C; }
+        .badge-warn { background: rgba(255,149,0,0.13); color: #B25E00; }
+        .badge-off { background: rgba(255,59,48,0.13); color: #C0392B; }
+        .footer {
+            text-align: center;
+            padding: 12px;
+            font-size: 11px;
+            color: var(--muted);
+            border-top: 1px solid var(--border);
+            background: rgba(0,0,0,0.015);
+        }
+        .footer strong {
+            background: linear-gradient(135deg, var(--grad-start), var(--grad-end));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 800;
+        }
+        .footer a { color: inherit; }
+        code {
+            background: rgba(233,30,99,0.07);
+            color: var(--primary-dk);
+            padding: 2px 8px;
+            border-radius: 6px;
+            font-size: 11px;
+            font-family: 'SF Mono', 'Consolas', monospace;
+            direction: ltr;
+            display: inline-block;
+            font-weight: 700;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="logo"><img src="../assets/img/icon128.png" alt="سكول بت"></div>
+        <h1>سكول بت</h1>
+        <div class="sub">مساعد المدرسة في منصتي نور ومدرستي</div>
+    </div>
+    <div class="body">
+
+        <div class="card">
+            <div class="title">🚀 ابدأ هنا</div>
+            <div class="desc">افتح المنصة لتظهر قائمة سكول بت داخل الصفحة:</div>
+            <a class="btn btn-primary" href="https://schools.madrasati.sa" target="_blank">
+                افتح مدرستي
+            </a>
+            <a class="btn btn-outline" href="https://noor.moe.gov.sa" target="_blank">
+                افتح نور
+            </a>
+        </div>
+
+        <div class="card">
+            <div class="title">📱 إعدادات الرسائل</div>
+            <div class="desc">اضبط بوابة SMS واختر اسم المرسل:</div>
+            <button class="btn btn-primary" id="open-sms">افتح صفحة الإعدادات</button>
+            <a class="btn btn-outline" href="https://sms.corbit.sa" target="_blank" rel="noopener">
+                الحصول على مفتاح API من <span dir="ltr">sms.corbit.sa</span>
+            </a>
+        </div>
+
+        <div class="card">
+            <div class="title">🎧 الدعم الفني — على مدار الساعة 24/7</div>
+            <div class="desc">اتصال وواتساب على الرقم الموحّد <b dir="ltr">920006900</b></div>
+            <a class="btn btn-primary" href="tel:920006900">📞 اتصال 920006900</a>
+            <a class="btn btn-outline" href="https://wa.me/966920006900" target="_blank" rel="noopener">💬 واتساب 920006900</a>
+        </div>
+
+        <div class="card">
+            <div class="title">📊 الحالة</div>
+            <div class="status-row">
+                <span class="lbl">الإصدار</span>
+                <span><code id="version">—</code></span>
+            </div>
+            <div class="status-row">
+                <span class="lbl">بوابة الرسائل</span>
+                <span class="badge badge-muted" id="sms-badge">—</span>
+            </div>
+        </div>
+
+    </div>
+    <div class="footer">
+        سكول بت · جميع الحقوق محفوظة لـ <strong>كوربت - المدار</strong> · <a href="https://corbit.sa" target="_blank" rel="noopener">corbit.sa</a>
+    </div>
+    <script src="popup.js"></script>
+</body>
+</html>

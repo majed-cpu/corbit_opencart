@@ -1,0 +1,20 @@
+import json, shutil, os
+W='/tmp/claude-0/-home-user-corbit-opencart/9818c0dc-5bae-5d5a-9e50-90c0658dfb5f/scratchpad'
+T=W+'/tbuild'; shutil.rmtree(T, ignore_errors=True)
+shutil.copytree(W+'/build', T, ignore=shutil.ignore_patterns('.git'))
+p=T+'/manifest.json'; m=json.load(open(p,encoding='utf-8'))
+m['content_scripts'][0]['matches'].append('http://localhost/*')
+m['web_accessible_resources'][0]['matches'].append('http://localhost/*')
+m['host_permissions'].append('http://localhost:8133/*')
+json.dump(m,open(p,'w',encoding='utf-8'),ensure_ascii=False,indent=2)
+p=T+'/assets/js/b.js'; s=open(p,encoding='utf-8').read()
+s=s.replace("    var isMadrasatiOrNoor = host.endsWith('madrasati.sa') || host.endsWith('moe.gov.sa');",
+"    if (host === 'localhost') { loadScript(EXT_BASE + 'assets/js/features/noor/corbit-provider.js?_id=' + rand); return; }\n    var isMadrasatiOrNoor = host.endsWith('madrasati.sa') || host.endsWith('moe.gov.sa');",1)
+open(p,'w',encoding='utf-8').write(s)
+p=T+'/assets/js/features/noor/corbit-provider.js'; s=open(p,encoding='utf-8').read()
+s=s.replace('var API = "https://api.corbit.sa/api/v1";','var API = "http://localhost:8133/api/v1";'); open(p,'w',encoding='utf-8').write(s)
+p=T+'/assets/js/service-worker.js'; s=open(p,encoding='utf-8').read()
+s=s.replace("const CORBIT_ORIGINS = ['https://api.corbit.sa', 'https://sms.corbit.sa'];","const CORBIT_ORIGINS = ['https://api.corbit.sa', 'https://sms.corbit.sa', 'http://localhost:8133'];")
+s=s.replace("return u.protocol === 'https:' && ","return (u.protocol === 'https:' || u.origin === 'http://localhost:8133') && ")
+open(p,'w',encoding='utf-8').write(s)
+print('tbuild ok')

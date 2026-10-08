@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>سكول بت — تقرير</title>
+    <link rel="stylesheet" href="reports.css">
+</head>
+<body>
+    <div class="toolbar no-print" id="toolbar">
+        <div class="brand">
+            <img src="../assets/img/icon48.png" alt="سكول بت">
+            <span>سكول بت</span>
+        </div>
+        <div class="actions">
+            <button class="btn btn-primary" id="btn-print">🖨️ طباعة</button>
+            <button class="btn btn-outline" id="btn-excel">📗 تصدير Excel</button>
+            <button class="btn btn-outline" id="btn-landscape">↔️ عرضي / طولي</button>
+        </div>
+    </div>
+
+    <div class="page" id="page">
+        <header class="report-header" id="report-header">
+            <div class="meta meta-right">
+                <div>المملكة العربية السعودية</div>
+                <div>وزارة التعليم</div>
+                <div id="hdr-school">—</div>
+            </div>
+            <div class="meta meta-center">
+                <h1 id="hdr-title">—</h1>
+                <div id="hdr-subtitle" class="subtitle"></div>
+            </div>
+            <div class="meta meta-left">
+                <div>التاريخ: <span id="hdr-date">—</span></div>
+                <div id="hdr-admin"></div>
+                <div class="small">أُعدّ بواسطة إضافة سكول بت</div>
+            </div>
+        </header>
+
+        <main id="report"><div class="loading">جارٍ تجهيز التقرير…</div></main>
+
+        <footer class="report-footer">
+            <span>سكول بت · كوربت - المدار · الدعم الفني 920006900</span>
+        </footer>
+    </div>
+
+    <script src="../assets/js/features/lib/xlsx.full.min.js"></script>
+    <script src="sms.js"></script>
+    <script src="view.js"></script>
+</body>
+</html>
